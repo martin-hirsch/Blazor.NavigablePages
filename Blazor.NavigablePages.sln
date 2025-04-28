@@ -5,6 +5,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0901B2BC-377C-471B-8BCA-488631EBA832}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\pipeline.yml = .github\workflows\pipeline.yml
+		GitVersion.yml = GitVersion.yml
 	EndProjectSection
 EndProject
 Global
