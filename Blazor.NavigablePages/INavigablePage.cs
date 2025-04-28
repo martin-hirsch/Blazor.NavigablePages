@@ -6,6 +6,11 @@ public interface INavigablePage<TRoutableComponent> where TRoutableComponent : I
 {
     static abstract string Path { get; }
 
+    /// <summary>
+    ///     Navigate to the page
+    ///     <remarks>Use <see cref="NavigationManagerExtensions" /> for enhanced readability</remarks>
+    /// </summary>
+    /// <param name="navigationManager"></param>
     static void NavigateTo(NavigationManager navigationManager)
     {
         navigationManager.NavigateTo(TRoutableComponent.Path);

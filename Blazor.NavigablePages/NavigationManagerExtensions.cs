@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Blazor.NavigablePages;
 
-public static class NavigationManagerExtension
+public static class NavigationManagerExtensions
 {
     public static void NavigateTo<TRoutableComponent>(this NavigationManager navigationManager) where TRoutableComponent : INavigablePage<TRoutableComponent>
     {
