@@ -2,6 +2,10 @@
 
 namespace Blazor.NavigablePages;
 
+/// <summary>
+///     Use this interface for parameterless pages
+/// </summary>
+/// <typeparam name="TRoutableComponent">The Page that implements this interface</typeparam>
 public interface INavigablePage<TRoutableComponent> where TRoutableComponent : INavigablePage<TRoutableComponent>
 {
     static abstract string Path { get; }
