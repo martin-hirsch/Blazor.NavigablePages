@@ -40,14 +40,15 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
       - name: Pack
+        if: startsWith(github.ref, 'refs/tags/v')
         run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{ env.VERSION }} -o ./nupkgs
 
       - name: Upload package artifact
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v4
         with:
           name: nupkg
           path: ./nupkgs/*.nupkg
-
   publish:
     name: Publish NuGet Package
     needs: build-test
