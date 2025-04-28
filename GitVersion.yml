@@ -1,36 +1,10 @@
-mode: ContinuousDeployment
-commit-message-incrementing: Enabled
+mode: Mainline
 branches:
-  main:
-    regex: ^main$
-    increment: Patch
-    prevent-increment-of-merged-branch-version: true
-  feature:
-    regex: ^features?[/-]
-    increment: Minor
-    track-merge-target: true
-  fix:
-    regex: ^fix(es)?[/-]
-    increment: Patch
-    track-merge-target: true
-  release:
-    regex: ^releases?[/-]
-    tag: rc
-    increment: None
+  master:
+    regex: (^main$)
     is-release-branch: true
-    track-merge-target: false
-  hotfix:
-    regex: ^hotfix(es)?[/-]
-    tag: hotfix
-    increment: Patch
-    track-merge-target: false
-  pull-request:
-    tag: PullRequest
-    increment: Patch
-
-ignore:
-  sha: []
-
-assembly-versioning-scheme: MajorMinorPatch
-assembly-file-versioning-scheme: MajorMinorPatch
-tag-prefix: 'v'
+    is-mainline: true
+  feature:
+    regex: ^(?!main$).*$
+    is-release-branch: false
+    is-mainline: false
