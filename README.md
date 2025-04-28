@@ -1,0 +1,1 @@
+# Typesafe navigation in Blazor
