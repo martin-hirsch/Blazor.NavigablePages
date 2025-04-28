@@ -6,10 +6,12 @@
         <Nullable>enable</Nullable>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Martin Hirsch</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.4" />
+        <None Include="docs\README.md" Pack="true" PackagePath="\"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components" Version="9.0.4"/>
     </ItemGroup>
 
 </Project>
