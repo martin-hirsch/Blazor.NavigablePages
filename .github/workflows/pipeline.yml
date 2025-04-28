@@ -26,17 +26,6 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Install GitVersion
-        uses: GitTools/actions/gitversion/setup@v3
-        with:
-          versionSpec: '5.x'
-
-      - name: Determine Version
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v3
-        with:
-          useConfigFile: true
-
       - name: Restore dependencies
         run: dotnet restore
 
@@ -45,6 +34,19 @@ jobs:
 
       - name: Test
         run: dotnet test --configuration Release --no-build --no-restore --verbosity normal
+
+      - name: Extract version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{ env.VERSION }} -o ./nupkgs
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkg
+          path: ./nupkgs/*.nupkg
 
   publish:
     name: Publish NuGet Package
@@ -55,33 +57,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with: 
-          fetch-depth: '0'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
-      - name: Install GitVersion
-        uses: GitTools/actions/gitversion/setup@v3
+      - name: Download package artifact
+        uses: actions/download-artifact@v4
         with:
-          versionSpec: '5.x'
-
-      - name: Determine Version
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v3
-        with:
-          useConfigFile: true
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Pack with dynamic version
-        run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -o ./nupkgs
+          name: nupkg
+          path: ./nupkgs
 
       - name: Push to NuGet
         run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
