@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -29,9 +31,11 @@ jobs:
         with:
           versionSpec: '5.x'
 
-      - name: Run GitVersion
+      - name: Determine Version
         id: gitversion
-        uses: GitTools/actions/gitversion/execute@v3
+        uses: gittools/actions/gitversion/execute@v3
+        with:
+          useConfigFile: true
 
       - name: Restore dependencies
         run: dotnet restore
@@ -64,9 +68,11 @@ jobs:
         with:
           versionSpec: '5.x'
 
-      - name: Run GitVersion
+      - name: Determine Version
         id: gitversion
-        uses: GitTools/actions/gitversion/execute@v3
+        uses: gittools/actions/gitversion/execute@v3
+        with:
+          useConfigFile: true
 
       - name: Restore dependencies
         run: dotnet restore
