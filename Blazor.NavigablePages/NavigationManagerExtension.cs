@@ -6,7 +6,7 @@ public static class NavigationManagerExtension
 {
     public static void NavigateTo<TRoutableComponent>(this NavigationManager navigationManager) where TRoutableComponent : INavigablePage<TRoutableComponent>
     {
-        navigationManager.NavigateTo(TRoutableComponent.RouteTemplate);
+        navigationManager.NavigateTo(TRoutableComponent.Path);
     }
 
     public static void NavigateTo<TRoutableComponent, TNavigationParameter>(this NavigationManager navigationManager, TNavigationParameter navigationParameter) where TRoutableComponent : INavigablePage<TRoutableComponent, TNavigationParameter>
