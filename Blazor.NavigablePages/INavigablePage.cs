@@ -27,5 +27,8 @@ public interface INavigablePage<in TRoutableComponent, in TNavigationParameter> 
 
     static abstract string GetPathWithParameters(TNavigationParameter navigationParameter);
 
-    static abstract void NavigateTo(NavigationManager navigationManager, TNavigationParameter navigationParameter);
+    static void NavigateTo(NavigationManager navigationManager, TNavigationParameter navigationParameter)
+    {
+        navigationManager.NavigateTo(TRoutableComponent.GetPathWithParameters(navigationParameter));
+    }
 }
