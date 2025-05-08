@@ -9,7 +9,7 @@
 ```csharp
 public static string Path => "/collections/sites";
 
-public static string GetPathWithParameters(IndexNavigationParameter navigationParameter)
+public static string GetPathWithParameters(NavigationParameter navigationParameter)
 {
     var parameters = new Dictionary<string, string>
     {
@@ -21,4 +21,4 @@ public static string GetPathWithParameters(IndexNavigationParameter navigationPa
 
     return result;
 }
-```~~~~
+```
