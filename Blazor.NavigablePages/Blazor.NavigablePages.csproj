@@ -7,6 +7,11 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Martin Hirsch</Authors>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageProjectUrl>https://github.com/martin-hirsch/Blazor.NavigablePages</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/martin-hirsch/Blazor.NavigablePages</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>blazor;navigation;</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
